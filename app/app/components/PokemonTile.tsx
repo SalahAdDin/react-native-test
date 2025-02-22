@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Chip, Text, View, Card } from "react-native-ui-lib";
-import { PokemonDetail } from "../domain/pokemon.model";
+import { Card, Chip, Text, View } from "react-native-ui-lib";
 import { TYPE_COLORS } from "../constants";
+import { PokemonDetail } from "../domain/pokemon.model";
 
 interface PokemonTileProps {
   pokemon: PokemonDetail;
