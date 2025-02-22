@@ -32,7 +32,7 @@ const PokeList = () => {
       <View style={styles.column}>
         <Text style={styles.center}>No favoritos</Text>
         <FlatList
-          data={favorites}
+          data={nonFavorites}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <PokemonTile pokemon={item} onPress={toggleFavorite} />
@@ -42,7 +42,7 @@ const PokeList = () => {
       <View style={styles.column}>
         <Text style={styles.center}>Favoritos</Text>
         <FlatList
-          data={nonFavorites}
+          data={favorites}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <PokemonTile pokemon={item} onPress={toggleFavorite} />
