@@ -2,6 +2,13 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## Demo
+
+After launching you will see:
+
+- Pokemon List:
+![Watch Demo](./Demo.webm)
+
 ## Get started
 
 1. Install dependencies
