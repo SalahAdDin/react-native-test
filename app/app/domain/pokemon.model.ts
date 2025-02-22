@@ -1,3 +1,5 @@
+import { PokemonType } from "../constants";
+
 export interface Sprites {
   backDefault: string;
   backFemale: string | null;
@@ -10,7 +12,8 @@ export interface Sprites {
 }
 
 export interface Type {
-  name: string;
+  id: number;
+  name: PokemonType;
   url: string;
 }
 
