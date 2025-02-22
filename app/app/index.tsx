@@ -1,4 +1,4 @@
-import { sortElements } from "@/utils";
+import { sortObjectsByKey } from "@/utils";
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import usePokemons from "./hooks/usePokemons";
@@ -12,7 +12,8 @@ export default function HomeScreen() {
 
   useEffect(() => {
     if (pokemons) {
-      setFavorites(pokemons);
+      const organizedPokemons = sortObjectsByKey(pokemons, "height");
+      setFavorites(organizedPokemons);
     }
   }, [pokemons]);
 

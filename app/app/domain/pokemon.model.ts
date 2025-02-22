@@ -25,6 +25,7 @@ export interface PokemonDetail {
   order: number;
   sprites: Sprites;
   types: Array<Type>;
+  height: number;
 }
 
 export type PokemonListResponse = {
