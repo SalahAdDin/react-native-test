@@ -25,6 +25,7 @@ const PokemonTile: React.FC<PokemonTileProps> = ({ pokemon, onPress }) => {
       backgroundColor={bgColor}
       borderRadius={15}
       row
+      testID={`pokemon-${pokemon.name}`}
     >
       <View flex padding-20>
         <View row spread centerV>
