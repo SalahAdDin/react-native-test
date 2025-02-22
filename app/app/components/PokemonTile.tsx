@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Image, TouchableOpacity } from "react-native";
-import { Block, Card, Text, Button } from "galio-framework";
+import { StyleSheet } from "react-native";
+import { Chip, Text, View, Card } from "react-native-ui-lib";
 import { PokemonDetail } from "../domain/pokemon.model";
 import { TYPE_COLORS } from "../constants";
 
@@ -11,43 +11,74 @@ interface PokemonTileProps {
 
 const PokemonTile: React.FC<PokemonTileProps> = ({ pokemon, onPress }) => {
   const primaryType = pokemon.types[0].name || "normal";
-  const bgColor = TYPE_COLORS[primaryType] || "#A8A77A";
+  const bgColor = TYPE_COLORS[primaryType]?.base || TYPE_COLORS.unknown.base;
+  const lightBgColor =
+    TYPE_COLORS[primaryType]?.light || TYPE_COLORS.unknown.light;
+  const textColor = TYPE_COLORS[primaryType]?.text || TYPE_COLORS.unknown.text;
 
   return (
-    <TouchableOpacity onPress={() => onPress(pokemon)}>
-      <Card
-        flex
-        borderless
-        shadow
-        style={{ backgroundColor: bgColor, borderRadius: 10, padding: 10 }}
-      >
-        <Block>
-          <Text bold size={20} color="white">
-            {pokemon.name}
+    <Card
+      onPress={() => onPress(pokemon)}
+      flex
+      marginB-10
+      enableShadow
+      backgroundColor={bgColor}
+      borderRadius={15}
+      row
+    >
+      <View flex padding-20>
+        <View row spread centerV>
+          <View row gap-10 centerV>
+            <Text text60BO color={textColor}>
+              #{pokemon.id.toString().padStart(3, "0")}
+            </Text>
+            <Text text50BO color={textColor}>
+              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            </Text>
+          </View>
+          <Text text70BO marginT-5 color={textColor}>
+            {pokemon.height}
           </Text>
-          <Text size={14} color="white" style={{ opacity: 0.7 }}>
-            #{pokemon.id.toString().padStart(3, "0")}
-          </Text>
-        </Block>
-        <Image
-          source={{ uri: pokemon.sprites.frontDefault }}
-          style={{ width: 80, height: 80, alignSelf: "center" }}
-        />
-        <Block row center space="evenly" style={{ marginTop: 10 }}>
+        </View>
+        <View row marginT-10 gap-5>
           {pokemon.types.map((type) => (
-            <Button
-              key={type.id}
-              small
-              color="white"
-              textStyle={{ color: "black" }}
-            >
-              {type.name}
-            </Button>
+            <Chip
+              key={`${pokemon.name}-${type.id}`}
+              label={type.name.toUpperCase()}
+              labelStyle={{ color: TYPE_COLORS[type.name].text, fontSize: 14 }}
+              containerStyle={{
+                borderColor: TYPE_COLORS[type.name].base,
+                backgroundColor: TYPE_COLORS[type.name].light,
+              }}
+            />
           ))}
-        </Block>
-      </Card>
-    </TouchableOpacity>
+        </View>
+      </View>
+
+      <View style={[styles.imageContainer, { backgroundColor: lightBgColor }]}>
+        <Card.Image
+          source={{ uri: pokemon.sprites.frontDefault }}
+          style={styles.image}
+        />
+      </View>
+    </Card>
   );
 };
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    width: 120,
+    justifyContent: "center",
+    alignItems: "center",
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+    borderTopLeftRadius: 75,
+    borderBottomLeftRadius: 75,
+  },
+  image: {
+    width: 100,
+    height: 100,
+  },
+});
 
 export default PokemonTile;
