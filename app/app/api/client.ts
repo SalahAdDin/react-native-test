@@ -1,8 +1,8 @@
 import axios from "axios";
-import Constants from "expo-constants";
+import { API_BASE_URL } from "../constants";
 
 const client = axios.create({
-  baseURL: Constants.expoConfig?.extra?.apiKey ?? "",
+  baseURL: API_BASE_URL,
 });
 
 export default client;
