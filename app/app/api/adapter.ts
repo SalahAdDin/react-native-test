@@ -22,7 +22,7 @@ export const adaptTypes = (data: Array<APIType>) =>
     if (!isValidPokemonType(type.name))
       throw new Error(`Invalid type: ${type.name}`);
 
-    const id = type.url.split("/")[-2];
+    const id = type.url.split("/").at(-2);
 
     return { ...type, id } as unknown as Type;
   });
