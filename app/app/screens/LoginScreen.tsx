@@ -17,17 +17,29 @@ const LoginScreen = () => {
 
   return (
     <View gap-20 padding-20 center>
-      <Text text40BO center marginB-20>
+      <Text text40BO center marginB-60>
         Login
       </Text>
       <TextField
         placeholder="Email"
+        floatOnFocus
+        floatingPlaceholder
+        floatingPlaceholderColor={{
+          focus: Colors.$textDefault,
+          default: Colors.$textNeutral,
+        }}
         value={email}
         onChangeText={setEmail}
         style={styles.input}
       />
       <TextField
         placeholder="Password"
+        floatOnFocus
+        floatingPlaceholder
+        floatingPlaceholderColor={{
+          focus: Colors.$textDefault,
+          default: Colors.$textNeutral,
+        }}
         value={password}
         onChangeText={setPassword}
         secureTextEntry
