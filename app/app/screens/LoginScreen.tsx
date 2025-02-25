@@ -1,4 +1,5 @@
-import auth from "@react-native-firebase/auth";
+import { auth } from "@/firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Colors, Text, TextField, View } from "react-native-ui-lib";
@@ -9,9 +10,9 @@ const LoginScreen = () => {
   const [error, setError] = useState(null);
 
   const handleLogin = () => {
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => setError(error.message));
+    signInWithEmailAndPassword(auth, email, password).catch((error) =>
+      setError(error.message)
+    );
   };
 
   return (

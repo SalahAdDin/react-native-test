@@ -1,9 +1,11 @@
 import { useReactQueryDevTools } from "@dev-plugins/react-query";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
 
-// import "./firebase";
+import { auth } from "@/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { Colors, LoaderScreen } from "react-native-ui-lib";
+import LoginScreen from "./screens/LoginScreen";
 import PokeList from "./screens/PokeList";
 
 const queryClient = new QueryClient();
@@ -11,19 +13,16 @@ const queryClient = new QueryClient();
 export default function HomeScreen() {
   useReactQueryDevTools(queryClient);
 
-  /* 
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+  const [user, setUser] = useState<unknown | null>(null);
   const [initializing, setInitializing] = useState(true);
 
-  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  };
-
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber;
-  }, []);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      if (initializing) setInitializing(false);
+    });
+    return unsubscribe;
+  }, [initializing]);
 
   if (initializing)
     return (
@@ -33,14 +32,10 @@ export default function HomeScreen() {
   if (!user) {
     return <LoginScreen />;
   }
- */
+
   return (
     <QueryClientProvider client={queryClient}>
       <PokeList />
     </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  loader: { flex: 1, justifyContent: "center", alignItems: "center" },
-});

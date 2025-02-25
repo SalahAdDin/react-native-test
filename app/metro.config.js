@@ -6,4 +6,6 @@ const config = getDefaultConfig(__dirname);
 
 config.resolver.blacklistRE = /.*\.test\.(ts|tsx|js|jsx)$/;
 
+config.resolver.sourceExts.push("cjs");
+
 module.exports = config;
